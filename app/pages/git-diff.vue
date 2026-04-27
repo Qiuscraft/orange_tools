@@ -3,7 +3,7 @@ import { buildGitDiff, diffExample } from '~/utils/gitDiff'
 
 useSeoMeta({
   title: 'Git Diff | Orange Tools',
-  description: '输入两段文本，查看类似 VS Code 的 Git Diff 可视化差异结果。'
+  description: '使用 VS Code 风格的 Git diff 视图对比两段文本'
 })
 
 const leftInput = ref('')
@@ -50,24 +50,24 @@ function loadExample(): void {
       <div class="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_22rem]">
         <div>
           <p class="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--ot-orange-deep)]">
-            Git Diff Visualizer
+            Git Diff 可视化工具
           </p>
           <h1 class="mt-4 text-4xl font-semibold leading-tight text-[var(--ot-ink)] sm:text-5xl">
-            把两段文本放进来，像看代码审查一样看差异。
+            像专注的代码审查一样对比两段文本
           </h1>
           <p class="mt-5 max-w-3xl text-base leading-8 text-[var(--ot-muted)] sm:text-lg">
-            首版使用浏览器本地 diff 计算，先做行级对齐，再对修改行做词级高亮。你可以直接粘贴配置、代码、日志或 Markdown 内容来比对变化。
+            这个工具在浏览器中运行 diff，按行对齐变化，并以内联方式高亮修改的 token。粘贴代码、配置、日志或 Markdown，立即查看变更集。
           </p>
         </div>
 
         <div class="ot-surface rounded-[28px] p-5">
           <p class="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--ot-orange-deep)]">
-            Current Mode
+            当前模式
           </p>
           <div class="mt-4 space-y-3 text-sm leading-7 text-[var(--ot-muted)]">
-            <p>布局：左右分栏，移动端自动改为上下堆叠。</p>
-            <p>粒度：整行差异 + 修改行词级高亮。</p>
-            <p>范围：纯文本输入，不做文件上传和编辑器集成。</p>
+            <p>布局：桌面端双栏，小屏幕堆叠块。</p>
+            <p>粒度：完整行变化加内联 token 高亮。</p>
+            <p>范围：仅纯文本，无文件上传或编辑器集成。</p>
           </div>
         </div>
       </div>
@@ -78,14 +78,14 @@ function loadExample(): void {
         <div class="mb-4 flex items-center justify-between gap-3">
           <div>
             <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--ot-orange-deep)]">
-              Original
+              原始文本
             </p>
             <h2 class="mt-1 text-xl font-semibold text-[var(--ot-ink)]">
-              旧文本
+              之前的版本
             </h2>
           </div>
           <span class="rounded-full bg-stone-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-stone-700">
-            Left
+            左侧
           </span>
         </div>
 
@@ -94,7 +94,7 @@ function loadExample(): void {
           :rows="16"
           autoresize
           class="ot-code"
-          placeholder="把旧版本内容粘贴到这里"
+          placeholder="在此粘贴之前的版本"
         />
       </div>
 
@@ -102,14 +102,14 @@ function loadExample(): void {
         <div class="mb-4 flex items-center justify-between gap-3">
           <div>
             <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--ot-orange-deep)]">
-              Revised
+              修订文本
             </p>
             <h2 class="mt-1 text-xl font-semibold text-[var(--ot-ink)]">
-              新文本
+              更新后的版本
             </h2>
           </div>
           <span class="rounded-full bg-stone-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-stone-700">
-            Right
+            右侧
           </span>
         </div>
 
@@ -118,7 +118,7 @@ function loadExample(): void {
           :rows="16"
           autoresize
           class="ot-code"
-          placeholder="把新版本内容粘贴到这里"
+          placeholder="在此粘贴更新后的版本"
         />
       </div>
     </section>
@@ -127,25 +127,25 @@ function loadExample(): void {
       <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--ot-orange-deep)]">
-            Actions
+            操作
           </p>
           <p class="mt-2 text-sm leading-7 text-[var(--ot-muted)]">
-            先把两边文本填好，再执行对比。`Swap` 适合快速切换视角，`Load Example` 用来查看默认效果。
+            对比前请填写两侧输入。使用"交换"反转视角，或"加载示例"预览默认效果。
           </p>
         </div>
 
         <div class="flex flex-wrap gap-3">
           <UButton color="warning" size="lg" trailing-icon="i-lucide-git-compare" @click="compareNow">
-            Compare
+            对比
           </UButton>
           <UButton color="neutral" variant="outline" size="lg" trailing-icon="i-lucide-repeat-2" @click="swapInputs">
-            Swap
+            交换
           </UButton>
           <UButton color="neutral" variant="outline" size="lg" trailing-icon="i-lucide-eraser" @click="clearAll">
-            Clear
+            清空
           </UButton>
           <UButton color="neutral" variant="soft" size="lg" trailing-icon="i-lucide-flask-conical" @click="loadExample">
-            Load Example
+            加载示例
           </UButton>
         </div>
       </div>
@@ -155,14 +155,14 @@ function loadExample(): void {
       <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p class="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--ot-orange-deep)]">
-            Diff Result
+            对比结果
           </p>
           <h2 class="mt-1 text-2xl font-semibold text-[var(--ot-ink)]">
-            {{ hasChanges ? '差异已生成' : '两段文本当前一致' }}
+            {{ hasChanges ? '对比完成' : '两段文本当前完全相同' }}
           </h2>
         </div>
         <p class="text-sm leading-7 text-[var(--ot-muted)]">
-          {{ hasChanges ? '修改行会在行内继续高亮，方便直接定位具体词块变化。' : '当前没有增删改。你仍然可以继续替换内容后再次比较。' }}
+          {{ hasChanges ? '已变化的行包含内联高亮，方便定位具体的 token 编辑。' : '目前没有新增、删除或修改。你可以替换任意一侧并重新对比。' }}
         </p>
       </div>
 
@@ -171,13 +171,13 @@ function loadExample(): void {
 
     <section v-else class="ot-surface rounded-[30px] border-dashed p-8 text-center">
       <p class="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--ot-orange-deep)]">
-        Waiting For Input
+        等待输入
       </p>
       <h2 class="mt-3 text-2xl font-semibold text-[var(--ot-ink)]">
-        先输入两段文本，再生成可视化 diff
+        输入两段文本以生成可视化 diff
       </h2>
       <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[var(--ot-muted)]">
-        这个页面的目标不是做完整编辑器，而是尽快把文本差异看清楚。所以首版只保留最核心的输入、比对和阅读体验。
+        这里的目标不是替代编辑器，而是让文本变化快速可读，因此首版只保留核心的输入、对比、审查流程。
       </p>
     </section>
   </div>

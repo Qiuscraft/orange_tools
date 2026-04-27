@@ -35,14 +35,14 @@ function rowClass(row: DiffRow): string {
 
 function sideLabel(row: DiffRow, side: 'left' | 'right'): string {
   const isMissing = side === 'left' ? row.leftLineNumber === null : row.rightLineNumber === null
-  return isMissing ? '∅' : side === 'left' ? 'OLD' : 'NEW'
+  return isMissing ? '∅' : side === 'left' ? '旧' : '新'
 }
 
 const summaryItems = computed(() => [
-  { label: 'Modified', value: props.result.summary.modified, tone: 'bg-amber-100 text-amber-800' },
-  { label: 'Added', value: props.result.summary.added, tone: 'bg-emerald-100 text-emerald-800' },
-  { label: 'Removed', value: props.result.summary.removed, tone: 'bg-orange-100 text-orange-800' },
-  { label: 'Unchanged', value: props.result.summary.unchanged, tone: 'bg-stone-100 text-stone-700' }
+  { label: '已修改', value: props.result.summary.modified, tone: 'bg-amber-100 text-amber-800' },
+  { label: '已新增', value: props.result.summary.added, tone: 'bg-emerald-100 text-emerald-800' },
+  { label: '已删除', value: props.result.summary.removed, tone: 'bg-orange-100 text-orange-800' },
+  { label: '未变化', value: props.result.summary.unchanged, tone: 'bg-stone-100 text-stone-700' }
 ])
 </script>
 
@@ -62,10 +62,10 @@ const summaryItems = computed(() => [
     <div class="overflow-hidden rounded-[28px] border border-[var(--ot-line)] bg-white/80 shadow-[0_18px_48px_rgba(117,52,0,0.08)]">
       <div class="grid gap-px bg-[var(--ot-line)] lg:grid-cols-2">
         <div class="bg-stone-950 px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-white/75">
-          Original
+          原始文本
         </div>
         <div class="bg-stone-950 px-4 py-3 text-xs font-semibold uppercase tracking-[0.28em] text-white/75 lg:border-l lg:border-white/10">
-          Revised
+          修订文本
         </div>
       </div>
 
