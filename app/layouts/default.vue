@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const route = useRoute()
+</script>
+
 <template>
   <div class="ot-shell">
     <header class="sticky top-0 z-40 border-b border-[var(--ot-line)] bg-white/75 backdrop-blur-xl">
@@ -17,10 +21,10 @@
         </NuxtLink>
 
         <nav class="flex items-center gap-2">
-          <UButton to="/" variant="ghost" color="neutral" size="sm">
+          <UButton to="/" :variant="route.path === '/' ? 'soft' : 'ghost'" :color="route.path === '/' ? 'primary' : 'neutral'" size="sm">
             首页
           </UButton>
-          <UButton to="/git-diff" variant="soft" color="primary" size="sm">
+          <UButton to="/git-diff" :variant="route.path === '/git-diff' ? 'soft' : 'ghost'" :color="route.path === '/git-diff' ? 'primary' : 'neutral'" size="sm">
             Git Diff
           </UButton>
         </nav>
