@@ -27,6 +27,9 @@ const route = useRoute()
           <UButton to="/git-diff" :variant="route.path === '/git-diff' ? 'soft' : 'ghost'" :color="route.path === '/git-diff' ? 'primary' : 'neutral'" size="sm">
             Git Diff
           </UButton>
+          <UButton to="/json-diff" :variant="route.path === '/json-diff' ? 'soft' : 'ghost'" :color="route.path === '/json-diff' ? 'primary' : 'neutral'" size="sm">
+            JSON Diff
+          </UButton>
         </nav>
       </div>
     </header>
